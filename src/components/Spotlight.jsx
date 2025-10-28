@@ -2,14 +2,27 @@ import React from 'react';
 import { Star, Play } from 'lucide-react';
 
 const PosterCard = () => {
+  const [imgSrc, setImgSrc] = React.useState('https://picsum.photos/seed/cinema-spotlight/800/1200');
+
   return (
     <div className="group relative w-full max-w-md cursor-pointer">
       <div className="relative aspect-[2/3] overflow-hidden rounded-xl border border-white/10 bg-gradient-to-b from-white/10 to-white/5 p-[1px]">
-        <div className="h-full w-full overflow-hidden rounded-xl bg-[url('https://images.unsplash.com/photo-1695740633675-d060b607f5c4?ixid=M3w3OTkxMTl8MHwxfHNlYXJjaHwxfHxjZXJhbWljJTIwcG90dGVyeSUyMGhhbmRtYWRlfGVufDB8MHx8fDE3NjE2MjYwMjV8MA&ixlib=rb-4.1.0&w=1600&auto=format&fit=crop&q=80')] bg-cover bg-center transition-transform duration-300 group-hover:scale-[1.03]" />
-        <div className="pointer-events-none absolute inset-0 rounded-xl shadow-[inset_0_0_40px_rgba(0,0,0,0.6)]" />
+        <div className="relative h-full w-full overflow-hidden rounded-xl">
+          <img
+            src={imgSrc}
+            alt="Spotlight poster"
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+            loading="lazy"
+            onError={() => setImgSrc('https://picsum.photos/seed/fallback-spotlight/800/1200')}
+          />
+          <div className="pointer-events-none absolute inset-0 rounded-xl shadow-[inset_0_0_40px_rgba(0,0,0,0.6)]" />
+        </div>
       </div>
-      {/* 3D tilt effect using perspective */}
-      <div className="pointer-events-none absolute -inset-1 -z-0 rounded-2xl opacity-60 blur-2xl transition duration-300 group-hover:opacity-90" style={{ background: 'linear-gradient(45deg, rgba(34,211,238,0.4), rgba(217,70,239,0.4))' }} />
+      {/* Glow */}
+      <div
+        className="pointer-events-none absolute -inset-1 -z-0 rounded-2xl opacity-60 blur-2xl transition duration-300 group-hover:opacity-90"
+        style={{ background: 'linear-gradient(45deg, rgba(34,211,238,0.4), rgba(217,70,239,0.4))' }}
+      />
 
       <button className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2 rounded-full bg-white/10 px-4 py-2 text-sm text-white backdrop-blur-lg transition hover:bg-white/20">
         <div className="flex items-center gap-2">

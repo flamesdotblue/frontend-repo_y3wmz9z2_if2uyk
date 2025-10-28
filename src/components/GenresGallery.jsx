@@ -6,42 +6,42 @@ const sampleMovies = [
     id: 1,
     title: 'Neon Drift',
     genre: 'Action',
-    poster: 'https://images.unsplash.com/photo-1517602302552-471fe67acf66?q=80&w=1400&auto=format&fit=crop',
+    poster: 'https://picsum.photos/seed/neon-drift/800/1200',
     trailer: 'https://www.w3schools.com/html/mov_bbb.mp4',
   },
   {
     id: 2,
     title: 'Echoes of Andromeda',
     genre: 'Sci‑Fi',
-    poster: 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963f?q=80&w=1400&auto=format&fit=crop',
+    poster: 'https://picsum.photos/seed/andromeda/800/1200',
     trailer: 'https://www.w3schools.com/html/movie.mp4',
   },
   {
     id: 3,
     title: 'Velvet Noire',
     genre: 'Drama',
-    poster: 'https://images.unsplash.com/photo-1524985069026-dd778a71c7b4?q=80&w=1400&auto=format&fit=crop',
+    poster: 'https://picsum.photos/seed/velvet-noire/800/1200',
     trailer: 'https://www.w3schools.com/html/mov_bbb.mp4',
   },
   {
     id: 4,
     title: 'Laugh Track',
     genre: 'Comedy',
-    poster: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1400&auto=format&fit=crop',
+    poster: 'https://picsum.photos/seed/laugh-track/800/1200',
     trailer: 'https://www.w3schools.com/html/movie.mp4',
   },
   {
     id: 5,
     title: 'Crimson Night',
     genre: 'Horror',
-    poster: 'https://images.unsplash.com/photo-1502139214984-406a2d1f9908?q=80&w=1400&auto=format&fit=crop',
+    poster: 'https://picsum.photos/seed/crimson-night/800/1200',
     trailer: 'https://www.w3schools.com/html/mov_bbb.mp4',
   },
   {
     id: 6,
     title: 'Orbitals',
     genre: 'Sci‑Fi',
-    poster: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1400&auto=format&fit=crop',
+    poster: 'https://picsum.photos/seed/orbitals/800/1200',
     trailer: 'https://www.w3schools.com/html/movie.mp4',
   },
 ];
@@ -50,6 +50,7 @@ const genres = ['All', 'Action', 'Sci‑Fi', 'Drama', 'Comedy', 'Horror'];
 
 function MovieCard({ movie }) {
   const [hover, setHover] = useState(false);
+  const [imgSrc, setImgSrc] = useState(movie.poster);
   return (
     <div
       onMouseEnter={() => setHover(true)}
@@ -58,10 +59,11 @@ function MovieCard({ movie }) {
     >
       {/* Poster */}
       <img
-        src={movie.poster}
+        src={imgSrc}
         alt={movie.title}
         className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-300 ${hover ? 'opacity-0' : 'opacity-100'}`}
         loading="lazy"
+        onError={() => setImgSrc('https://picsum.photos/seed/fallback-'+movie.id+'/800/1200')}
       />
       {/* Trailer Preview */}
       <video
